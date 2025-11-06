@@ -1,0 +1,16 @@
+# SSH Log Analysis Splunk Queries
+
+1️. Validate Log Ingestion  
+index=ssh_logs | stats count by event_type
+
+2️. Failed Login Attempts  
+index=ssh_logs event_type="Failed SSH Login" | stats count by id.orig_h
+
+3️. Multiple Failed Authentication  
+index=ssh_logs event_type="Multiple Failed Authentication Attempts" | stats count by id.orig_h, id.resp_h
+
+4️. Successful Logins  
+index=ssh_logs event_type="Successful SSH Login" | stats count by id.orig_h, id.resp_h
+
+5️. Connections Without Authentication  
+index=ssh_logs event_type="Connection Without Authentication" | timechart count by id.orig_h
